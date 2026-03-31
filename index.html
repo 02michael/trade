@@ -5,5 +5,73 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <div class="app">
+      <div class="equity-hero" id="equityHero">
+        <div class="hero-label">Total Equity</div>
+        <div class="equity-hero-row">
+          <div class="hero-value" id="heroValue">—</div>
+          <div class="hero-controls">
+            <div class="hero-status">
+              <div class="status-dot" id="statusDot"></div>
+              <span id="statusText">...</span>
+            </div>
+            <div class="hero-sep"></div>
+            <select
+              class="hero-select"
+              id="refreshInterval"
+              onchange="setRefreshInterval()"
+            >
+              <option value="0">off</option>
+              <option value="10">10s</option>
+              <option value="30" selected>30s</option>
+              <option value="60">1m</option>
+              <option value="300">5m</option>
+            </select>
+            <button class="hero-btn" onclick="fetchAll()">↻</button>
+          </div>
+        </div>
+      </div>
+      <div id="walletContainer"></div>
+    </div>
+
+    <div
+      class="modal-overlay"
+      id="fundingModal"
+      onclick="closeFundingModal(event)"
+    >
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <div class="modal-title">
+            Funding History
+            <span class="coin-tag" id="modalCoinTag">—</span>
+            <span class="wallet-tag" id="modalWalletTag">—</span>
+          </div>
+          <button class="modal-close" onclick="closeFundingModal()">
+            &times;
+          </button>
+        </div>
+        <div class="modal-summary" id="modalSummary">
+          <div>
+            <div class="stat-label">Total (7d)</div>
+            <div class="stat-value" id="modalTotalFunding">—</div>
+          </div>
+          <div>
+            <div class="stat-label">Payments</div>
+            <div class="stat-value" id="modalPaymentCount">—</div>
+          </div>
+          <div>
+            <div class="stat-label">Avg / Payment</div>
+            <div class="stat-value" id="modalAvgFunding">—</div>
+          </div>
+        </div>
+        <div class="modal-body" id="modalBody">
+          <div class="funding-loading">Loading funding data</div>
+        </div>
+        <div class="modal-footer" id="modalFooter">last 7 days of funding</div>
+      </div>
+    </div>
+  </body>
 </html>
